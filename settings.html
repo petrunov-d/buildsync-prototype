@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BuildSync Prototype – Settings</title>
+    <style>
+        :root {
+            --bg: #f4f6f8;
+            --card-bg: #ffffff;
+            --text: #334e68;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --font-size: 16px;
+        }
+
+        [data-theme="dark"] {
+            --bg: #1e1e1e;
+            --card-bg: #2a2a2a;
+            --text: #e0e0e0;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: var(--font-size);
+            background: var(--bg);
+            color: var(--text);
+            transition: 0.3s;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--text);
+            color: #fff;
+            padding: 1rem;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        .container {
+            padding: 1rem;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px var(--shadow);
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            margin-top: 0;
+        }
+
+        .section label {
+            display: block;
+            margin: 0.5rem 0 0.25rem;
+            font-weight: bold;
+        }
+
+        .section select, .section input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .actions button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .reset-btn {
+            background: #e63946;
+            color: #fff;
+        }
+
+        .export-btn {
+            background: #2a9d8f;
+            color: #fff;
+        }
+    </style>
+</head>
+<body data-theme="light">
+<header>
+    <div style="display:flex; align-items:center;"><h1>BuildSync</h1>
+        <button class="mode-toggle" id="toggleTheme">☾</button>
+    </div>
+    <nav>
+        <a href="index.html">Dashboard</a>
+        <a href="materials.html">Materials</a>
+        <a href="bid-builder.html">Bid Builder</a>
+        <a href="settings.html" class="active">Settings</a>
+    </nav>
+</header>
+<div class="container">
+    <h2>Settings</h2>
+
+    <div class="section">
+        <h3>Appearance</h3>
+        <label for="fontSizeSelect">Font Size</label>
+        <select id="fontSizeSelect">
+            <option value="16px">Normal</option>
+            <option value="18px">Large</option>
+            <option value="20px">Extra Large</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <h3>Units & Formatting</h3>
+        <label for="currencySelect">Currency</label>
+        <select id="currencySelect">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="AED">AED</option>
+        </select>
+        <label for="co2UnitsSelect">CO₂ Units</label>
+        <select id="co2UnitsSelect">
+            <option value="kg">kg</option>
+            <option value="tonnes">tonnes</option>
+        </select>
+    </div>
+
+    <div class="section">
+        <h3>Default Bid Parameters</h3>
+        <label for="bufferInput">Default Bid Buffer (%)</label>
+        <input type="number" id="bufferInput" min="0" max="100" value="5"/>
+        <label for="markupInput">Default Markup (%)</label>
+        <input type="number" id="markupInput" min="0" max="100" value="10"/>
+    </div>
+
+    <div class="section">
+        <h3>Reset & Export</h3>
+        <div class="actions">
+            <button class="reset-btn" id="resetBtn">Reset All Data</button>
+            <button class="export-btn" id="exportBtn">Export Settings</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Theme toggle
+        const toggle = document.getElementById('toggleTheme');
+        toggle.onclick = () => {
+            const b = document.body, t = b.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            b.setAttribute('data-theme', t);
+            toggle.textContent = t === 'light' ? '☾' : '☀';
+        };
+        // Font size
+        const fontSelect = document.getElementById('fontSizeSelect');
+        fontSelect.onchange = () => document.documentElement.style.setProperty('--font-size', fontSelect.value);
+        // Currency & CO2
+        document.getElementById('currencySelect').onchange = e => console.log('Currency:', e.target.value);
+        document.getElementById('co2UnitsSelect').onchange = e => console.log('CO2 units:', e.target.value);
+        // Bid parameters
+        document.getElementById('bufferInput').oninput = e => console.log('Buffer %:', e.target.value);
+        document.getElementById('markupInput').oninput = e => console.log('Markup %:', e.target.value);
+        // Reset
+        document.getElementById('resetBtn').onclick = () => {
+            if (confirm('Clear all data?')) {
+                localStorage.clear();
+                location.reload();
+            }
+        };
+        // Export
+        document.getElementById('exportBtn').onclick = () => {
+            const s = {
+                theme: document.body.getAttribute('data-theme'),
+                fontSize: fontSelect.value,
+                currency: document.getElementById('currencySelect').value,
+                co2Units: document.getElementById('co2UnitsSelect').value,
+                buffer: document.getElementById('bufferInput').value,
+                markup: document.getElementById('markupInput').value
+            };
+            const b = new Blob([JSON.stringify(s, null, 2)], {type: 'application/json'});
+            const u = URL.createObjectURL(b);
+            const a = document.createElement('a');
+            a.href = u;
+            a.download = 'settings.json';
+            a.click();
+            URL.revokeObjectURL(u);
+        };
+    });
+</script>
+</body>
+</html>
