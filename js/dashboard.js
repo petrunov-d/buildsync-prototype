@@ -47,8 +47,8 @@ const mockActivity = [
     { icon: '📅', text: 'Scheduled delivery for Bid #28', user: 'Steven Smith', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=joe', timestamp: '2025-05-11T12:00:00Z' },
     { icon: '📅', text: 'Scheduled delivery for Bid #29', user: 'Evan Van', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=chloe', timestamp: '2025-05-11T12:00:00Z' },
     { icon: '📅', text: 'Scheduled delivery for Bid #11', user: 'Van Dam', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=alan', timestamp: '2025-05-11T12:00:00Z' },
-    { icon: '📅', text: 'Scheduled delivery for Bid #13', user: 'Van Dam', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=peter', timestamp: '2025-05-11T12:00:00Z' },
-    { icon: '📅', text: 'Scheduled delivery for Bid #16', user: 'Van Dam', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=kate', timestamp: '2025-05-11T12:00:00Z' }
+    { icon: '📅', text: 'Scheduled delivery for Bid #13', user: 'Ethan SMith', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=peter', timestamp: '2025-05-11T12:00:00Z' },
+    { icon: '📅', text: 'Scheduled delivery for Bid #16', user: 'Slavoj Zizek', userId: 'henry', avatarUrl: 'https://i.pravatar.cc/24?u=kate', timestamp: '2025-05-11T12:00:00Z' }
 ];
 
 // Render and update activity list from mock data

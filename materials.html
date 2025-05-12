@@ -4,176 +4,28 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>BuildSync Prototype – Materials</title>
-    <style>
-        :root {
-            --bg: #f4f6f8;
-            --card-bg: #ffffff;
-            --text: #334e68;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        [data-theme="dark"] {
-            --bg: #1e1e1e;
-            --card-bg: #2a2a2a;
-            --text: #e0e0e0;
-            --shadow: rgba(0, 0, 0, 0.5);
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            transition: 0.3s;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--text);
-            color: #fff;
-            padding: 1rem;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 1.2rem;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .mode-toggle {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-
-        .container {
-            padding: 1rem;
-        }
-
-        .controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .controls input {
-            padding: 0.5rem;
-            flex: 1;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        .controls button {
-            padding: 0.5rem 1rem;
-            border: none;
-            background: var(--text);
-            color: #fff;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--card-bg);
-            margin-bottom: 1rem;
-        }
-
-        th, td {
-            padding: 0.75rem;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        tr:hover {
-            background: #f0f4f8;
-        }
-
-        .actions button {
-            margin-right: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .edit-btn {
-            background: #264653;
-            color: #fff;
-        }
-
-        .delete-btn {
-            background: #e63946;
-            color: #fff;
-        }
-
-        #formSection {
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px var(--shadow);
-            margin-bottom: 1rem;
-        }
-
-        #formSection.hidden {
-            display: none;
-        }
-
-        #formSection label {
-            display: block;
-            margin: 0.5rem 0;
-        }
-
-        #formSection input {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        #formSection button {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 0.5rem;
-        }
-
-        #saveBtn {
-            background: #2a9d8f;
-            color: #fff;
-        }
-
-        #cancelBtn {
-            background: #e76f51;
-            color: #fff;
-        }
-    </style>
+    <!-- UMD builds for Chart.js & CountUp.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.umd.js"></script>
+    <script src="https://unpkg.com/timeago.js/dist/timeago.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body data-theme="light">
 <header>
-    <div style="display:flex;align-items:center;"><h1>BuildSync</h1>
+    <div class="logo">BuildSync</div>
+    <div class="header-controls">
+        <input class="search-input" placeholder="Search…"/>
+        <div class="notification">🔔<span class="badge">3</span></div>
         <button class="mode-toggle" id="toggleTheme">☾</button>
+        <div class="avatar"></div>
     </div>
-    <nav>
-        <a href="index.html">Dashboard</a>
-        <a href="materials.html" class="active">Materials</a>
-        <a href="bid-builder.html">Bid Builder</a>
-        <a href="settings.html">Settings</a>
-    </nav>
 </header>
+<nav>
+    <a href="index.html">Dashboard</a>
+    <a href="materials.html">Materials</a>
+    <a href="bid-builder.html">Bid Builder</a>
+    <a href="settings.html">Settings</a>
+</nav>
 <div class="container">
     <h2>Materials Library</h2>
     <div class="controls">
@@ -182,10 +34,24 @@
     </div>
     <div id="formSection" class="hidden">
         <h3 id="formTitle">Add Material</h3>
-        <label>Name<input id="nameInput" type="text"/></label>
-        <label>Price ($/unit)<input id="priceInput" type="number" min="0"/></label>
-        <label>Lead Time (days)<input id="leadInput" type="number" min="0"/></label>
-        <label>CO₂ (kg/unit)<input id="co2Input" type="number" min="0" step="0.01"/></label>
+        <label>Name
+            <input id="nameInput" type="text"/>
+        </label>
+        <label>Supplier
+            <input id="supplierInput" type="text"/>
+        </label>
+        <label>Units
+            <input id="unitsInput" type="text" placeholder="e.g. kg, m³, each"/>
+        </label>
+        <label>Price ($/unit)
+            <input id="priceInput" type="number" min="0"/>
+        </label>
+        <label>Lead Time (days)
+            <input id="leadInput" type="number" min="0"/>
+        </label>
+        <label>CO₂ (kg/unit)
+            <input id="co2Input" type="number" min="0" step="0.01"/>
+        </label>
         <button id="saveBtn">Save</button>
         <button id="cancelBtn">Cancel</button>
     </div>
@@ -193,103 +59,29 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Supplier</th>
+            <th>Units</th>
             <th>Price</th>
             <th>Lead Time</th>
-            <th>CO₂</th>
+            <th>CO₂ Impact</th>
             <th>Actions</th>
+            <th>Historical Trends</th>
         </tr>
         </thead>
         <tbody></tbody>
     </table>
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Theme toggle
-        document.getElementById('toggleTheme').onclick = () => {
-            const b = document.body;
-            const t = b.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            b.setAttribute('data-theme', t);
-            document.getElementById('toggleTheme').textContent = t === 'light' ? '☾' : '☀';
-        };
-        // State
-        let materials = [
-            {name: 'Concrete', price: 120, lead: 14, carbon: 0.09},
-            {name: 'Rebar', price: 1200, lead: 7, carbon: 1.75},
-            {name: 'Insulation', price: 45, lead: 21, carbon: 0.02},
-            {name: 'Finishes', price: 200, lead: 10, carbon: 0.15}
-        ];
-        let editIndex = -1;
-        const tableBody = document.querySelector('#materialsTable tbody');
-        const formSection = document.getElementById('formSection');
-        const formTitle = document.getElementById('formTitle');
-        const nameIn = document.getElementById('nameInput');
-        const priceIn = document.getElementById('priceInput');
-        const leadIn = document.getElementById('leadInput');
-        const co2In = document.getElementById('co2Input');
-        const addBtn = document.getElementById('addBtn');
-        const saveBtn = document.getElementById('saveBtn');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const searchInput = document.getElementById('searchInput');
-
-        function render() {
-            const filter = searchInput.value.toLowerCase();
-            tableBody.innerHTML = '';
-            materials.forEach((m, i) => {
-                if (!m.name.toLowerCase().includes(filter)) return;
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-            <td>${m.name}</td>
-            <td>${m.price}</td>
-            <td>${m.lead}</td>
-            <td>${m.carbon}</td>
-            <td class="actions">
-              <button class="edit-btn" onclick="editItem(${i})">Edit</button>
-              <button class="delete-btn" onclick="deleteItem(${i})">Delete</button>
-            </td>`;
-                tableBody.appendChild(tr);
-            });
-        }
-
-        window.editItem = i => {
-            editIndex = i;
-            formTitle.textContent = 'Edit Material';
-            const m = materials[i];
-            nameIn.value = m.name;
-            priceIn.value = m.price;
-            leadIn.value = m.lead;
-            co2In.value = m.carbon;
-            formSection.classList.remove('hidden');
-        };
-        window.deleteItem = i => {
-            materials.splice(i, 1);
-            render();
-        };
-        addBtn.onclick = () => {
-            editIndex = -1;
-            formTitle.textContent = 'Add Material';
-            nameIn.value = '';
-            priceIn.value = '';
-            leadIn.value = '';
-            co2In.value = '';
-            formSection.classList.remove('hidden');
-        };
-        cancelBtn.onclick = () => {
-            formSection.classList.add('hidden');
-        };
-        saveBtn.onclick = () => {
-            const m = {
-                name: nameIn.value,
-                price: parseFloat(priceIn.value),
-                lead: parseInt(leadIn.value, 10),
-                carbon: parseFloat(co2In.value)
-            };
-            if (editIndex >= 0) materials[editIndex] = m; else materials.push(m);
-            formSection.classList.add('hidden');
-            render();
-        };
-        searchInput.oninput = render;
-        render();
-    });
-</script>
+<!-- Historical Trends Dialog -->
+<dialog id="historyDialog">
+    <header>
+        <h3>Historical Trends</h3>
+        <button id="closeHistory">✕</button>
+    </header>
+    <div id="historyContent">
+        <!-- Chart will be injected here -->
+        <canvas id="historyChart"></canvas>
+    </div>
+</dialog>
+<script src="js/materials.js"></script>
 </body>
 </html>

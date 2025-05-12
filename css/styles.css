@@ -253,8 +253,265 @@ nav a {
 
 .up {
     color: green;
+    margin-left: 0.3rem;
 }
 
 .down {
     color: red;
+    margin-left: 0.3rem;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.controls input {
+    padding: 0.5rem;
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.controls button {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: var(--text);
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+    margin-bottom: 1rem;
+}
+
+th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+tr:hover {
+    background: #f0f4f8;
+}
+
+.actions button {
+    margin-right: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background: #264653;
+    color: #fff;
+}
+
+.delete-btn {
+    background: #e63946;
+    color: #fff;
+}
+
+#formSection {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+#formSection.hidden {
+    display: none;
+}
+
+#formSection label {
+    display: block;
+    margin: 0.5rem 0;
+}
+
+#formSection input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#formSection button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+#saveBtn {
+    background: #2a9d8f;
+    color: #fff;
+}
+
+#cancelBtn {
+    background: #e76f51;
+    color: #fff;
+}
+
+.history-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.history-btn:hover {
+    background: #238678; /* a slightly darker accent for hover */
+}
+
+#historyContent {
+    padding: 1rem;
+}
+
+#historyContent canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+dialog {
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+dialog header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: var(--accent);
+    color: #fff;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+dialog header button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Table container */
+#materialsTable {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header */
+#materialsTable thead {
+    background: var(--accent);
+    color: #fff;
+}
+
+#materialsTable th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+/* Rows */
+#materialsTable tbody tr {
+    background: var(--card-bg);
+    transition: background 0.2s;
+}
+
+#materialsTable tbody tr:nth-child(odd) {
+    background: #f9fbfc;
+}
+
+#materialsTable tbody tr:hover {
+    background: #e8f1f2;
+}
+
+/* Cells */
+#materialsTable td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Actions & history button already styled */
+.actions button,
+.history-btn {
+    margin: 0;
+}
+
+/* Risk indicator */
+.risk-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+.risk-high {
+    background: #e63946;
+}
+
+/* red */
+.risk-medium {
+    background: #e9c46a;
+}
+
+/* amber */
+.risk-low {
+    background: #2a9d8f;
+}
+
+/* green */
+
+/* Custom tooltip for risk indicator */
+/* Custom tooltip for risk indicator */
+.risk-indicator {
+    position: relative;
+    cursor: help;
+}
+
+/* Hide by default */
+.risk-indicator::after {
+    display: none;
+}
+
+/* Show on hover, block‐level so it wraps the text */
+.risk-indicator:hover::after {
+    content: attr(data-tooltip);
+    display: block;
+    position: absolute;
+    top: -1.8em; /* lift it above the dot */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 0.25em 0.5em;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    z-index: 10;
+    pointer-events: none;
 }
