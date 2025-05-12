@@ -5,197 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>BuildSync Prototype – Dashboard</title>
 
-    <!-- Chart.js & CountUp.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.min.js"></script>
-
-    <style>
-        :root {
-            --bg: #f4f6f8;
-            --card-bg: #ffffff;
-            --text: #334e68;
-            --accent: #2a9d8f;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        [data-theme="dark"] {
-            --bg: #1e1e1e;
-            --card-bg: #2a2a2a;
-            --text: #e0e0e0;
-            --accent: #8dcfb1;
-            --shadow: rgba(0, 0, 0, 0.5);
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            transition: background 0.3s, color 0.3s;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--text);
-            color: #fff;
-            padding: 1rem;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .header-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .search-input {
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            border: none;
-            font-size: 0.9rem;
-        }
-
-        .notification {
-            position: relative;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .notification .badge {
-            position: absolute;
-            top: -4px;
-            right: -6px;
-            background: #e63946;
-            color: #fff;
-            border-radius: 50%;
-            padding: 2px 6px;
-            font-size: 0.7rem;
-        }
-
-        .avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: url('https://i.pravatar.cc/32') no-repeat center;
-            background-size: cover;
-            cursor: pointer;
-        }
-
-        .mode-toggle {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        nav {
-            background: var(--card-bg);
-            padding: 0.5rem 1rem;
-            box-shadow: 0 1px 3px var(--shadow);
-            display: flex;
-        }
-
-        nav a {
-            color: var(--text);
-            text-decoration: none;
-            margin-right: 1rem;
-            font-weight: bold;
-        }
-
-        .container {
-            padding: 1rem;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .card {
-            position: relative;
-            background: var(--card-bg);
-            border-radius: 6px;
-            padding: 1rem;
-            box-shadow: 0 1px 3px var(--shadow);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 8px var(--shadow);
-        }
-
-        .card-icon {
-            position: absolute;
-            top: 0.8rem;
-            right: 0.8rem;
-            font-size: 1.5rem;
-            opacity: 0.3;
-        }
-
-        .card h3 {
-            margin: 0 0 0.5rem;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .card p {
-            margin: 0.2rem 0 0.8rem;
-            font-size: 1.4rem;
-            font-weight: bold;
-        }
-
-        .card canvas {
-            width: 100%;
-            height: 30px;
-        }
-
-        .charts {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .chart-card, .activity {
-            background: var(--card-bg);
-            padding: 1rem;
-            border-radius: 6px;
-            box-shadow: 0 1px 3px var(--shadow);
-        }
-
-        .activity h3 {
-            margin-top: 0;
-        }
-
-        .activity ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .activity li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .activity li:last-child {
-            border-bottom: none;
-        }
-    </style>
+    <!-- UMD builds for Chart.js & CountUp.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.umd.js"></script>
+    <script src="https://unpkg.com/timeago.js/dist/timeago.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body data-theme="light">
 <header>
@@ -215,93 +29,116 @@
 </nav>
 
 <div class="container">
-    <h2>Dashboard</h2>
     <div class="cards">
+        <!-- Win-Rate Lift Card -->
         <div class="card" style="background:#e2f7e1;">
             <div class="card-icon">📈</div>
-            <h3>Win‑Rate Lift</h3>
+            <h3>
+                Win-Rate Lift
+                <span class="info" title="% point increase in win rate">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(% point increase in win rate)</p>
             <p id="cnt-win">0 pp</p>
-            <canvas id="sparkWin"></canvas>
+            <div class="progress-wrapper">
+                <div class="progress" data-current="7" data-target="10"></div>
+            </div>
+            <div class="details">
+                <p>Prev month: <strong>5 pp</strong></p>
+                <p>Trend: <span class="up">▲ 40%</span></p>
+            </div>
         </div>
+
+        <!-- Payback Card -->
         <div class="card" style="background:#e1f3f7;">
             <div class="card-icon">⏱</div>
-            <h3>Payback</h3>
+            <h3>
+                Payback
+                <span class="info" title="Months to break even">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(Months to break even)</p>
             <p id="cnt-payback">0 m</p>
-            <canvas id="sparkPayback"></canvas>
+            <div class="progress-wrapper">
+                <div class="progress" data-current="12" data-target="18"></div>
+            </div>
+            <div class="details">
+                <p>Prev month: <strong>15 m</strong></p>
+                <p>Trend: <span class="down">▼ 20%</span></p>
+            </div>
         </div>
+
+        <div class="card" style="background:#d5e5ff;">
+            <div class="card-icon">⏱</div>
+            <h3>
+                Current Active Bids
+                <span class="info" title="Current Active Bids">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">Current Active Bids </p>
+            <p id="cnt-users">5</p>
+        </div>
+
+        <!-- EBIT Boost Card -->
         <div class="card" style="background:#fff3e1;">
             <div class="card-icon">💹</div>
-            <h3>EBIT Boost</h3>
+            <h3>
+                EBIT Boost
+                <span class="info" title="Basis points increase in EBIT">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(Basis points increase in EBIT)</p>
             <p id="cnt-ebit">0 bps</p>
-            <canvas id="sparkEbit"></canvas>
+            <div class="progress-wrapper">
+                <div class="progress" data-current="70" data-target="100"></div>
+            </div>
+            <div class="details">
+                <p>Prev month: <strong>50 bps</strong></p>
+                <p>Trend: <span class="up">▲ 40%</span></p>
+            </div>
         </div>
+
+        <!-- CapEx Card -->
         <div class="card" style="background:#f2e1f7;">
             <div class="card-icon">💰</div>
-            <h3>Capex</h3>
+            <h3>
+                CapEx
+                <span class="info" title="Capital Expenditure">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(Total spend on equipment)</p>
             <p id="cnt-capex">$0k</p>
-            <canvas id="sparkCapex"></canvas>
+            <div class="progress-wrapper">
+                <div class="progress" data-current="400" data-target="500"></div>
+            </div>
+            <div class="details">
+                <p>Prev month: <strong>$350k</strong></p>
+                <p>Trend: <span class="up">▲ 14%</span></p>
+            </div>
         </div>
     </div>
-
-    <div class="charts">
-        <div class="chart-card">
-            <h3>CO₂ Emissions Breakdown</h3>
-            <canvas id="pieCO2"></canvas>
-        </div>
-        <div class="activity">
-            <h3>Recent Activity</h3>
-            <ul>
-                <li>✔️ Added 50 units of Concrete</li>
-                <li>⚠️ Rebar price updated</li>
-                <li>🔔 Bid #23 submitted</li>
-            </ul>
-        </div>
-    </div>
-
-    <p>Welcome to BuildSync! Use the menu to navigate.</p>
 </div>
 
+<div class="charts">
+    <div class="chart-card">
+        <h3>CO₂ Emissions Breakdown</h3>
+        <canvas id="barCO2"></canvas>
+    </div>
+    <div class="activity">
+        <h3>Recent Activity</h3>
+        <ul></ul>
+    </div>
+</div>
+
+<p>Welcome to BuildSync! Use the menu to navigate.</p>
+</div>
+
+<script src="js/dashboard.js"></script>
+<footer>
+    <p>BuildSync v1.0.0 — <span id="currentDate"></span></p>
+    <p>
+        <a href="/privacy">Privacy Policy</a> |
+        <a href="/terms">Terms of Service</a>
+    </p>
+</footer>
 <script>
-    document.getElementById('toggleTheme').addEventListener('click', () => {
-        const b = document.body;
-        const t = b.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        b.setAttribute('data-theme', t);
-        document.getElementById('toggleTheme').textContent = t === 'light' ? '☾' : '☀';
-    });
-
-    const opts = {duration: 1.5};
-    new CountUp('cnt-win', 7, {...opts, suffix: ' pp'}).start();
-    new CountUp('cnt-payback', 12, {...opts, suffix: ' m'}).start();
-    new CountUp('cnt-ebit', 70, {...opts, suffix: ' bps'}).start();
-    new CountUp('cnt-capex', 400, {...opts, prefix: '$', suffix: 'k'}).start();
-
-    ['sparkWin', 'sparkPayback', 'sparkEbit', 'sparkCapex'].forEach((id, i) => {
-        const dataSets = [[2, 3, 5, 6, 7, 7], [14, 13, 12, 12, 11, 12], [30, 40, 50, 60, 70, 70], [300, 350, 380, 400, 400, 400]][i];
-        const colors = ['#2a9d8f', '#264653', '#e76f51', '#8d99ae'][i];
-        new Chart(document.getElementById(id).getContext('2d'), {
-            type: 'line',
-            data: {
-                labels: dataSets.map((_, j) => j + 1),
-                datasets: [{data: dataSets, borderColor: colors, fill: false, tension: 0.3}]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {legend: {display: false}},
-                scales: {x: {display: false}, y: {display: false}},
-                elements: {point: {radius: 0}}
-            }
-        });
-    });
-
-    new Chart(document.getElementById('pieCO2').getContext('2d'), {
-        type: 'pie',
-        data: {
-            labels: ['Concrete', 'Rebar', 'Insulation', 'Finishes'],
-            datasets: [{data: [30, 25, 20, 25], backgroundColor: ['#2a9d8f', '#264653', '#e76f51', '#8d99ae']}]
-        },
-        options: {responsive: true, plugins: {legend: {position: 'bottom'}}}
-    });
+    document.getElementById('currentDate').textContent =
+        new Date().toLocaleString();
 </script>
 </body>
 </html>
