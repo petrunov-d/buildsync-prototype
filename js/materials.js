@@ -99,14 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="delete-btn" onclick="deleteItem(${i})">Delete</button>
       </td>
       <td>
-       <button class="history-btn" onclick="openHistory(${i})">View</button>
-     </td>
-    `;
+       <button class="history-btn actions" onclick="openHistory(${i})">View</button>
+     </td>`;
             tableBody.appendChild(tr);
         });
     }
 
-    // Expose edit and delete to global for inline handlers
     window.editItem = i => {
         editIndex = i;
         formTitle.textContent = 'Edit Material';

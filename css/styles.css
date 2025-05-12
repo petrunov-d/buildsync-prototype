@@ -319,6 +319,17 @@ tr:hover {
     color: #fff;
 }
 
+.history-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
 #formSection {
     background: var(--card-bg);
     padding: 1rem;
@@ -359,17 +370,6 @@ tr:hover {
 #cancelBtn {
     background: #e76f51;
     color: #fff;
-}
-
-.history-btn {
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
 }
 
 .history-btn:hover {
