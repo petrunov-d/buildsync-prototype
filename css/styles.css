@@ -515,3 +515,120 @@ dialog header button {
     z-index: 10;
     pointer-events: none;
 }
+
+:root {
+    --font-size: 16px;
+}
+
+body {
+    font-size: var(--font-size);
+}
+
+nav a {
+    font-size: 0.9rem;
+}
+
+.mode-toggle {
+    margin-left: 1rem;
+}
+
+/* Section container for forms and settings */
+.section {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.section h3 {
+    margin-top: 0;
+}
+
+.section label {
+    display: block;
+    margin: 0.5rem 0 0.25rem;
+    font-weight: bold;
+}
+
+.section select,
+.section input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Action buttons for form controls */
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.actions button {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.reset-btn {
+    background: #e63946;
+    color: #fff;
+}
+
+.export-btn {
+    background: #2a9d8f;
+    color: #fff;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Controls tweaks */
+.controls select {
+    flex: 2;
+}
+
+.controls input {
+    width: 80px;
+}
+
+/* Inline editable inputs in table cells */
+td input {
+    width: 60px;
+    padding: 0.25rem;
+}
+
+/* “Remove” button in the table */
+button.remove {
+    background: #e63946;
+    color: #fff;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Summary & analytics panels */
+.summary,
+.analytics {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px var(--shadow);
+    margin-bottom: 1rem;
+}
+
+.controls select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
