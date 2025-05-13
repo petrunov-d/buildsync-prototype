@@ -26,14 +26,182 @@
     <a href="settings.html">Settings</a>
 </nav>
 <div class="container">
-    <h2>Bid Builder</h2>
+    <h2 id="projectName" class="project-label">No project loaded</h2>
+    <!-- KPI Cards -->
+    <div class="cards" id="kpiCards">
+        <!-- Bid Success Rate -->
+        <div class="card" style="background:#e2f7e1;">
+            <div class="card-icon">🏆</div>
+            <h4>
+                Bid Success Rate
+                <span class="info" title="Percentage of bids won">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-bidSuccess">0%</p>
+        </div>
+        <!-- Predicted Project Cost -->
+        <div class="card" style="background:#e1f3f7;">
+            <div class="card-icon">💰</div>
+            <h4>
+                Predicted Project Cost
+                <span class="info" title="Total cost in AED">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(AED)</p>
+            <p id="kpi-predCost">0 AED</p>
+        </div>
+        <!-- Negotiation Margin -->
+        <div class="card" style="background:#fff3e1;">
+            <div class="card-icon">📈</div>
+            <h4>
+                Negotiation Margin
+                <span class="info" title="Expected negotiation buffer">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-negMargin">0%</p>
+        </div>
+        <!-- Bid Price Confidence -->
+        <div class="card" style="background:#f2e1f7;">
+            <div class="card-icon">🔒</div>
+            <h4>
+                Bid Price Confidence
+                <span class="info" title="Confidence level">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-priceConf">0%</p>
+        </div>
+        <!-- Optimal Resource Utilization -->
+        <div class="card" style="background:#e8f1f2;">
+            <div class="card-icon">👥</div>
+            <h4>
+                Optimal Resource Util.
+                <span class="info" title="Utilization rate">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-resourceUtil">0%</p>
+        </div>
+        <!-- Projected Profit -->
+        <div class="card" style="background:#fef3e0;">
+            <div class="card-icon">📊</div>
+            <h4>
+                Projected Profit
+                <span class="info" title="Expected profit">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-profit">0%</p>
+        </div>
+        <!-- Risk Score -->
+        <div class="card" style="background:#e0f7fa;">
+            <div class="card-icon">⚠️</div>
+            <h4>
+                Risk Score
+                <span class="info" title="1 (low) – 10 (high)">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(1–10)</p>
+            <p id="kpi-riskScore">0</p>
+        </div>
+        <!-- Estimated Duration -->
+        <div class="card" style="background:#f3e5f5;">
+            <div class="card-icon">⏳</div>
+            <h4>
+                Est. Duration
+                <span class="info" title="Days to complete">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(days)</p>
+            <p id="kpi-duration">0</p>
+        </div>
+        <!-- ROI -->
+        <div class="card" style="background:#e8f5e9;">
+            <div class="card-icon">💹</div>
+            <h4>
+                ROI
+                <span class="info" title="Return on investment">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-roi">0%</p>
+        </div>
+        <div class="card" style="background:#f5e8e8;">
+            <div class="card-icon">💹</div>
+            <h4>
+                Expected Profit Margin
+                <span class="info" title="Exp. Profit Margin">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-expected-profit-margin">0%</p>
+        </div>
+        <div class="card" style="background:#f5f3e8;">
+            <div class="card-icon">💹</div>
+            <h4>
+                CO₂ Emissions (Kg)
+                <span class="info" title="CO₂ Emissions">ⓘ</span>
+            </h4>
+            <p class="card-subtitle">(%)</p>
+            <p id="kpi-expected-co2-impact">0 KG</p>
+        </div>
+        <div class="card" style="background:#ffe5e5;">
+            <div class="card-icon">📦</div>
+            <h3>
+                Total Quantity
+                <span class="info" title="Sum of all quantities in SQM">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(SQM)</p>
+            <p id="cnt-totalQty">0</p>
+        </div>
+
+        <!-- Total Material Cost -->
+        <div class="card" style="background:#e5fff1;">
+            <div class="card-icon">💲</div>
+            <h3>
+                Total Material Cost
+                <span class="info" title="Sum of all material costs in AED">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(AED)</p>
+            <p id="cnt-totalMatCost">0 AED</p>
+        </div>
+
+        <!-- Total Installation Cost -->
+        <div class="card" style="background:#e5f1ff;">
+            <div class="card-icon">🛠️</div>
+            <h3>
+                Total Installation Cost
+                <span class="info" title="Sum of all installation costs in AED">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(AED)</p>
+            <p id="cnt-totalInstCost">0 AED</p>
+        </div>
+
+        <!-- Avg Carbon Intensity -->
+        <div class="card" style="background:#fff9e5;">
+            <div class="card-icon">🌱</div>
+            <h3>
+                Avg Carbon Intensity
+                <span class="info" title="Average CO₂ per SQM">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(kg/SQM)</p>
+            <p id="cnt-avgCarbon">0 kg/SQM</p>
+        </div>
+        <!-- Avg Unit Price -->
+        <div class="card" style="background:#f0f0f0;">
+            <div class="card-icon">🧮</div>
+            <h3>
+                Avg Unit Price
+                <span class="info" title="Average cost per unit in AED">ⓘ</span>
+            </h3>
+            <p class="card-subtitle">(AED)</p>
+            <p id="cnt-avgPrice">0 AED</p>
+        </div>
+
+    </div>
+
     <div class="controls">
         <select id="materialSelect">
             <option value="">-- Select Material --</option>
         </select>
         <input type="number" id="quantityInput" min="1" value="1"/>
         <button id="addBtn">Add to Bid</button>
+        <button id="importBtn">Import Bill Of Quantities</button>
+        <input type="file" id="fileInput" accept="*/*" hidden/>
     </div>
+
     <table id="bidTable">
         <thead>
         <tr>
@@ -57,5 +225,33 @@
     </div>
 </div>
 <script src="js/bid-builder.js"></script>
+
+<dialog id="importDialog">
+    <div class="loader" id="importLoader"></div>
+    <p id="importMessage" class="hidden"></p>
+    <div id="importActions" class="hidden">
+        <button id="importOk">OK</button>
+        <button id="importClose">Close</button>
+    </div>
+</dialog>
+
+<!-- Chat widget -->
+<button id="chatToggle" class="chat-toggle">💬</button>
+<div id="chatWindow" class="chat-window hidden">
+    <div class="chat-header">
+        Henry AI
+        <button id="chatClose" class="chat-close" aria-label="Close chat">×</button>
+    </div>
+    <div class="chat-body">
+        <div class="chat-message agent">
+            Hello Alice – I’m Henry the Bid Sync AI assistant – how may I help today?
+        </div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="chatInput" placeholder="Type a message…"/>
+        <button id="chatSend">Send</button>
+    </div>
+</div>
+
 </body>
 </html>

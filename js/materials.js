@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
         {name: 'Rebar', supplier: 'SteelCo', price: 1200, lead: 7, carbon: 1.75, units: 'kg'},
         {name: 'Insulation', supplier: 'EcoFoam', price: 45, lead: 21, carbon: 0.02, units: 'm²'},
         {name: 'Finishes', supplier: 'PaintPros', price: 200, lead: 10, carbon: 0.15, units: 'm²'},
-
-        // Additional materials
         {name: 'Brick', supplier: 'BrickCo', price: 0.50, lead: 7, carbon: 0.20, units: 'each'},
         {name: 'Mortar', supplier: 'MortarMasters', price: 0.15, lead: 5, carbon: 0.05, units: 'kg'},
         {name: 'Timber', supplier: 'TimberTech', price: 350, lead: 14, carbon: 0.10, units: 'm³'},
@@ -112,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         nameIn.value = m.name;
         priceIn.value = m.price;
         unitsIn.value = m.units;
-        supplierIn.value = m.supplier;    // a
+        supplierIn.value = m.supplier;
         leadIn.value = m.lead;
         co2In.value = m.carbon;
         formSection.classList.remove('hidden');
@@ -167,8 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openHistory = index => {
         const m = materials[index];
         historyDialog.showModal();
-        // Update dialog title to include material name
-        historyDialog.querySelector('h3').textContent = `${m.name} Historical Trends`;
+        historyDialog.querySelector('h4').textContent = `${m.name} Historical Trends`;
 
         // Generate labels & data for the last 12 months
         const now = new Date();
@@ -192,8 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 datasets: [{
                     label: `${m.name} Trend`,
                     data,
-                    borderColor: '#2a9d8f',     // accent color
-                    backgroundColor: 'rgba(42,157,143,0.2)', // fill under line
+                    borderColor: '#2a9d8f',
+                    backgroundColor: 'rgba(42,157,143,0.2)',
                     fill: true,
                     tension: 0.3,
                     pointRadius: 3
