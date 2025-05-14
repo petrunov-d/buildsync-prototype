@@ -174,7 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 11; i >= 0; i--) {
             const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
             labels.push(d.toLocaleString('default', {month: 'short', year: '2-digit'}));
-            data.push(Math.floor(Math.random() * 100));
+            const min = 45;
+            const max = 75;
+            data.push(Math.floor(Math.random() * (max - min + 1) + min));
         }
 
         // Destroy existing chart if present
