@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const PREDEFINED_ANSWERS = [
         "The project currently includes 2 200 SQM of Crema Marfil Marble (Part No. ST-CRM), as shown in the BOQ table under Quantity.",
-        "Substituting those 2 200 SQM with Carrara White Marble (unit rate AED 1 630) would change the cost from AED 1 056 000 (2 200 SQM × AED 480) to AED 3 586 000 (2 200 SQM × AED 1 630), a net increase of AED 2 530 000.",
-        "The combined total cost for all four marble types in the BOQ is AED 6 438 500 (AED 1 056 000 + AED 385 000 + AED 759 500 + AED 4 238 000).",
-        "Calacatta Gold Marble has the highest total unit rate at AED 2 170 per SQM, making it the most expensive material in the table."
+        "Substituting those 2 200 SQM with Carrara White Marble (unit rate $ 1 630) would change the cost from $ 1 056 000 (2 200 SQM × $ 480) to $ 3 586 000 (2 200 SQM × $ 1 630), a net increase of $ 2 530 000.",
+        "The combined total cost for all four marble types in the BOQ is $ 6 438 500 ($ 1 056 000 + $ 385 000 + $ 759 500 + $ 4 238 000).",
+        "Calacatta Gold Marble has the highest total unit rate at $ 2 170 per SQM, making it the most expensive material in the table."
     ];
 
     let replyIndex = 0;
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `Successfully imported ${count} rows of material data. Please review.`;
             importMessage.classList.remove('hidden');
             importActions.classList.remove('hidden');
-        }, 5 * 1000);
+        }, 3 * 1000);
     });
     importOk.addEventListener('click', () => {
         importDialog.close();
@@ -180,9 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // Bid Success Rate (%)
         new countUp.CountUp('kpi-bidSuccess', randomBetween(50, 100).toFixed(1), {suffix: '%'}).start();
 
-// Predicted Cost (AED)
         new countUp.CountUp('kpi-predCost', randomBetween(1_000_000_000, 2_000_000_000).toFixed(0), {
-            prefix: 'AED ',
+            prefix: '$ ',
             separator: ','
         }).start();
 
@@ -238,22 +237,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }).start();
 
         new countUp.CountUp('cnt-totalMatCost', totalMatCost.toFixed(0), {
-            prefix: 'AED ',
+            prefix: '$ ',
             separator: ','
         }).start();
 
         new countUp.CountUp('cnt-totalInstCost', randomBetween(500_000, 1_000_000).toFixed(0), {
-            prefix: 'AED ',
+            prefix: '$ ',
             separator: ','
         }).start();
 
-        new countUp.CountUp('cnt-avgCarbon', randomBetween(500_000, 1_000_000).toFixed(0), {
+        new countUp.CountUp('cnt-avgCarbon', randomBetween(700_000, 1_000_000).toFixed(0), {
             prefix: 'kg/SQM ',
             separator: ','
         }).start();
 
-        new countUp.CountUp('cnt-avgPrice', randomBetween(500_000, 1_000_000).toFixed(0), {
-            prefix: 'AED ',
+        new countUp.CountUp('cnt-avgPrice', randomBetween(70000, 100_000).toFixed(0), {
+            prefix: '$ ',
             separator: ','
         }).start();
     });
