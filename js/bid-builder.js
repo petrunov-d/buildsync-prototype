@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 `Successfully imported ${count} rows of material data. Please review.`;
             importMessage.classList.remove('hidden');
             importActions.classList.remove('hidden');
-        }, 3 * 1000);
+        }, 2 * 1000);
     });
     importOk.addEventListener('click', () => {
         importDialog.close();
