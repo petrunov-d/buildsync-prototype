@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const PREDEFINED_ANSWERS = [
-        "Substituting those 2 200 SQM with Carrara White Marble (unit rate $ 1 630) would change the cost from $ 1 056 000 (2 200 SQM × $ 480) to $ 3 586 000 (2 200 SQM × $ 1 630), a net increase of $ 2 530 000.",
-        "The combined total cost for all four marble types in the BOQ is $ 6 438 500 ($ 1 056 000 + $ 385 000 + $ 759 500 + $ 4 238 000).",
+        "Substituting those 2 200 SQM with Carrara White Marble (unit rate $ 1 630) would change the cost from $ 1 056 000 (2 200 SQM × $ 480) to $ 3 586 000 (2 200 SQM × $ 1 630), a net increase of $ 2 530 000."
     ];
 
     let replyIndex = 0;
